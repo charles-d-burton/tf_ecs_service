@@ -8,7 +8,7 @@ data "aws_caller_identity" "current" {}
   }
 } */
 
-resource "aws_cloudwatch_log_group" "task-log" {
+resource "aws_cloudwatch_log_group" "task_log" {
   name              = "${var.log_group_name}"
   retention_in_days = "365"
 
@@ -22,7 +22,7 @@ resource "aws_cloudwatch_log_group" "task-log" {
   log_group_name  = "ECS-${var.service_name}"
   filter_pattern  = ""
   destination_arn = "${data.terraform_remote_state.logger.lambda_to_es_arn}"
-  depends_on      = ["aws_cloudwatch_log_group.task-log", "aws_lambda_permission.allow_cloudwatch"]
+  depends_on      = ["aws_cloudwatch_log_group.task_log", "aws_lambda_permission.allow_cloudwatch"]
 
   lifecycle {
     create_before_destroy = true
@@ -57,7 +57,7 @@ resource "aws_iam_role" "ecs_role" {
 
 resource "aws_iam_role" "task_role" {
   name               = "tf_task_${var.service_name}"
-  assume_role_policy = "${data.iam-aws_iam_policy_document.task_role.json}"
+  assume_role_policy = "${data.aws_iam_policy_document.task_role.json}"
 }
 
 resource "aws_iam_policy_attachment" "ecs_attachment" {
