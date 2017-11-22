@@ -25,6 +25,7 @@ variable "region" {
   type = "string"
 }
 
+<<<<<<< HEAD
 variable "enable_autoscaling" {
   description = "Enable application autoscaling"
   default     = false
@@ -45,4 +46,9 @@ variable "alb_arn" {
   description = "The ARN of the load balancer to attach to"
   type        = "string"
   default     = ""
+=======
+variable "log_group_name" {
+  type = "string"
+  description = "cloudwatch log group name"
+>>>>>>> 58832fcfc3f1e53e9644ec5ad266ac2fb6786e67
 }
