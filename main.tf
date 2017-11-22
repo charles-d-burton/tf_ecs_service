@@ -51,12 +51,12 @@ resource "aws_iam_policy" "task_policy" {
 }
 
 resource "aws_iam_role" "ecs_role" {
-  name               = "tf_ecs_role-${var.service_name}"
+  name               = "tf-ecs-role-${var.service_name}"
   assume_role_policy = "${data.aws_iam_policy_document.ecs_role.json}"
 }
 
 resource "aws_iam_role" "task_role" {
-  name               = "tf_task_${var.service_name}"
+  name               = "tf-task-${var.service_name}"
   assume_role_policy = "${data.aws_iam_policy_document.task_role.json}"
 }
 
