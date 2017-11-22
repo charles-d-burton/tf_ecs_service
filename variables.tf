@@ -24,3 +24,25 @@ variable "add_task_policy" {
 variable "region" {
   type = "string"
 }
+
+variable "enable_autoscaling" {
+  description = "Enable application autoscaling"
+  default     = false
+}
+
+####Define the load balancer if using one
+variable "use_load_balancer" {
+  default = false
+}
+
+variable "target_group_arn" {
+  description = "The ARN of the target group to attach to"
+  type        = "string"
+  default     = ""
+}
+
+variable "alb_arn" {
+  description = "The ARN of the load balancer to attach to"
+  type        = "string"
+  default     = ""
+}
