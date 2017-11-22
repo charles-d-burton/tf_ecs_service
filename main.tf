@@ -9,7 +9,7 @@ data "aws_caller_identity" "current" {}
 } */
 
 resource "aws_cloudwatch_log_group" "task-log" {
-  name              = "/aws/ecs/${var.region}/${var.service_name}"
+  name              = "${var.log_group_name}"
   retention_in_days = "365"
 
   tags {

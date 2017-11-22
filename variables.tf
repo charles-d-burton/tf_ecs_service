@@ -24,3 +24,8 @@ variable "add_task_policy" {
 variable "region" {
   type = "string"
 }
+
+variable "log_group_name" {
+  type = "string"
+  description = "cloudwatch log group name"
+}
