@@ -89,17 +89,17 @@ variable "log_group_path" {
 }
 
 #Enable log forwarding
-variable "enable_logs_function" {
+variable "enable_log_forwarding" {
   default     = false
   description = "Enable attaching lambda log forwarder to log stream"
 }
 
-variable "logs_function_arn" {
+variable "log_forwarding_arn" {
   default     = ""
   description = "ARN of lambda function to attach to log stream"
 }
 
-variable "logs_function_name" {
+variable "log_forwarding_name" {
   default     = ""
   description = "The name of the function being called"
 }

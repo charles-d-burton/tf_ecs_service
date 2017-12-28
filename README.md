@@ -61,9 +61,9 @@ module "service" {
 | nlb_arn                            | string | arn of NLB to attach to                           |               |
 | listener_port                      | int    | port to assign to listener on LB                  |               |
 | log\_group_path                    | string | path for cloudwatch logging                       |               |
-| enable\_logs_function              | bool   | enable log forwarding to lambda                   | false         |
-| logs\_function_arn                 | string | arn of function to attach to log stream           |               |
-| logs\_function_name                | string | name of lambda function to forward logs           |               |
+| enable\_log_forwarding             | bool   | enable log forwarding to lambda                   | false         |
+| log\_forwarding_arn                | string | arn of function to attach to log stream           |               |
+| log\_forwarding_name               | string | name of lambda function to forward logs           |               |
 | filter_pattern                     | string | log forwarding subscription filter pattern        | ""            |
 | max\_log_retention                 | int    | maximum time to keep logs in days                 | 365           |
 | health\_check_interval             | int    | time between health checks                        | 30            |
