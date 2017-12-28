@@ -1,5 +1,5 @@
 output "task_log_group_arn" {
-  value = "${aws_cloudwatch_log_group.task_log.arn}"  
+  value = "${aws_cloudwatch_log_group.task_log.arn}"
 }
 
 output "task_role_arn" {
