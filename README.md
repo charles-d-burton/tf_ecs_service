@@ -1,5 +1,6 @@
 # tf-ecs-service
 a `terraform` module that manages an ECS service
+Note: You must have a working ECS cluster to use this module, it does not create the cluster for you.
 
 ## Getting Started
 
