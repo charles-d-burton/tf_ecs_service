@@ -59,7 +59,7 @@ resource "aws_alb_listener" "front_end_http" {
 
 #Create the service and attach the task definition
 resource "aws_ecs_service" "ecs_service_alb" {
-  count           = "${var.alb_arn == "" ? 1 : 0}"
+  count           = "${var.use_alb == true ? 1 : 0}"
   name            = "${var.service_name}"
   cluster         = "${var.cluster_name}"
   task_definition = "${aws_ecs_task_definition.task_definition.arn}"
