@@ -1,6 +1,6 @@
 #Create the log stream, all functions will need this
 resource "aws_cloudwatch_log_group" "task_log" {
-  name              = "/aws/${var.log_group_path}/${var.service_name}"
+  name              = "${var.log_group_path}/${var.service_name}"
   retention_in_days = "${var.max_log_retention}"
 
   tags {
