@@ -71,6 +71,11 @@ variable "use_load_balancer" {
   default = false
 }
 
+variable "use_alb" {
+  description = "Conditional to use an ALB vs NLB"
+  default     = false
+}
+
 variable "alb_arn" {
   description = "The ARN of the HTTP load balancer to attach to"
   type        = "string"
@@ -81,6 +86,11 @@ variable "nlb_arn" {
   description = "The ARN of the TCP load balancer to attach to"
   type        = "string"
   default     = ""
+}
+
+variable "use_nlb" {
+  description = "Conditional to use an ALB vs NLB"
+  default     = false
 }
 
 variable "listener_port" {
