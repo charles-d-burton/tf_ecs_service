@@ -58,7 +58,7 @@ variable "scale_in_cooldown" {
 
 variable "max_containers" {
   description = "The maximum number of containers to scale to"
-  deafult     = 20
+  default     = 20
 }
 
 ####Define the load balancer if using one
