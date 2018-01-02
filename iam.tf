@@ -24,14 +24,12 @@ resource "aws_iam_role" "task_role" {
 
 #Attach ECS policy to ECS Role
 resource "aws_iam_role_policy_attachment" "ecs_attachment" {
-  name       = "tf-ecs-attachment-${var.service_name}"
   policy_arn = "${aws_iam_policy.ecs_service.arn}"
   role       = "${aws_iam_role.ecs_role.name}"
 }
 
 #Attache Task policy to Task role
 resource "aws_iam_role_policy_attachment" "task_attachment" {
-  name       = "tf-ecs-attachment-${var.service_name}-task"
   policy_arn = "${aws_iam_policy.task_policy.arn}"
   role       = "${aws_iam_role.task_role.name}"
 }
@@ -39,7 +37,6 @@ resource "aws_iam_role_policy_attachment" "task_attachment" {
 #Will only attach a policy if set to true
 resource "aws_iam_role_policy_attachment" "extra_task_attachment" {
   count      = "${var.add_task_policy}"
-  name       = "tf-ecs-attachment-${var.service_name}-extra-task"
   policy_arn = "${var.task_policy_arn}"
   role       = "${aws_iam_role.task_role.name}"
 }
