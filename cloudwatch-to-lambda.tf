@@ -1,4 +1,4 @@
-//Add log filters and have it call lambda function
+#Add log filters and have it call lambda function
 resource "aws_cloudwatch_log_subscription_filter" "cloudwatch_lambda_filter" {
   count           = "${var.enable_logs_function = true ? 1 : 0 }"
   name            = "ecs-filter-${var.service_name}"
