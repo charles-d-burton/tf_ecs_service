@@ -17,7 +17,7 @@ resource "aws_ecs_task_definition" "task_definition" {
 
 #Create the service and attach the task definition
 resource "aws_ecs_service" "ecs_service" {
-  count           = "${var.use_load_balancer == false ? 1 : 0}"
+  count           = "${var.use_load_balancer ? 0 : 1}"
   name            = "${var.service_name}"
   cluster         = "${var.cluster_name}"
   task_definition = "${aws_ecs_task_definition.task_definition.arn}"
@@ -26,7 +26,7 @@ resource "aws_ecs_service" "ecs_service" {
 
 #Create the target group for the http version of the service
 resource "aws_alb_target_group" "target_group_http" {
-  count    = "${var.use_alb == true ? 1 : 0}"
+  count    = "${var.use_alb ? 1 : 0}"
   name     = "${var.service_name}"
   port     = "${var.container_port}"
   protocol = "HTTP"
@@ -46,7 +46,7 @@ resource "aws_alb_target_group" "target_group_http" {
 
 #Create the HTTP listener bound to the internal load balancer
 resource "aws_alb_listener" "front_end_http" {
-  count             = "${var.use_alb == true ? 1 : 0}"
+  count             = "${var.use_alb ? 1 : 0}"
   load_balancer_arn = "${var.alb_arn}"
   port              = "${var.listener_port}"
   protocol          = "HTTP"
@@ -59,7 +59,7 @@ resource "aws_alb_listener" "front_end_http" {
 
 #Create the service and attach the task definition
 resource "aws_ecs_service" "ecs_service_alb" {
-  count           = "${var.use_load_balancer == true ? 1 : 0}"
+  count           = "${var.use_alb ? 1 : 0}"
   name            = "${var.service_name}"
   cluster         = "${var.cluster_name}"
   task_definition = "${aws_ecs_task_definition.task_definition.arn}"

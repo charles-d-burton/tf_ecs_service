@@ -43,19 +43,19 @@ resource "aws_iam_role_policy_attachment" "extra_task_attachment" {
 
 #Policy for autoscaling
 resource "aws_iam_policy" "autoscaling_policy" {
-  count  = "${var.enable_autoscaling == true ? 1 : 0}"
+  count  = "${var.enable_autoscaling ? 1 : 0}"
   name   = "autoscaling-${var.service_name}"
   policy = "${data.aws_iam_policy_document.autoscaling_policy.json}"
 }
 
 resource "aws_iam_role" "autoscaling_role" {
-  count              = "${var.enable_autoscaling == true ? 1 : 0}"
+  count              = "${var.enable_autoscaling ? 1 : 0}"
   name               = "tf-autoscalinng-${var.service_name}"
   assume_role_policy = "${data.aws_iam_policy_document.autoscaling_role.json}"
 }
 
 resource "aws_iam_policy_attachment" "autoscaling_attachment" {
-  count      = "${var.enable_autoscaling == true ? 1 : 0}"
+  count      = "${var.enable_autoscaling ? 1 : 0}"
   name       = "tf-autoscaling-attachment-${var.service_name}"
   policy_arn = "${aws_iam_policy.autoscaling_policy.arn}"
   role       = "${aws_iam_role.autoscaling_role.name}"

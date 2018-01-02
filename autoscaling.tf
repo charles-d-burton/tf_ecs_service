@@ -1,5 +1,5 @@
 resource "aws_appautoscaling_target" "service_target" {
-  count              = "${var.enable_autoscaling == true ? 1 : 0}"
+  count              = "${var.enable_autoscaling ? 1 : 0}"
   max_capacity       = "${var.max_containers}"
   min_capacity       = "${var.desired_count}"
   resource_id        = "service/${var.cluster_name}/${var.service_name}"
@@ -9,7 +9,7 @@ resource "aws_appautoscaling_target" "service_target" {
 }
 
 resource "aws_appautoscaling_policy" "service_down_policy" {
-  count                   = "${var.enable_autoscaling == true ? 1 : 0}"
+  count                   = "${var.enable_autoscaling ? 1 : 0}"
   adjustment_type         = "ChangeInCapacity"
   cooldown                = "${var.scale_in_cooldown}"
   metric_aggregation_type = "Minimum"
@@ -27,7 +27,7 @@ resource "aws_appautoscaling_policy" "service_down_policy" {
 }
 
 resource "aws_appautoscaling_policy" "service_up_policy" {
-  count                   = "${var.enable_autoscaling == true ? 1 : 0}"
+  count                   = "${var.enable_autoscaling ? 1 : 0}"
   adjustment_type         = "ChangeInCapacity"
   cooldown                = "${var.scale_out_cooldown}"
   metric_aggregation_type = "Maximum"
