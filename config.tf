@@ -209,6 +209,6 @@ data "aws_iam_policy_document" "logging_policy" {
   statement {
     effect    = "Allow"
     actions   = ["lambda:InvokeFunction"]
-    resources = ["${var.logs_function_arn}"]
+    resources = ["${var.log_forwarding_arn}"]
   }
 }

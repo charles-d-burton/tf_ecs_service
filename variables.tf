@@ -30,6 +30,11 @@ variable "region" {
   type = "string"
 }
 
+variable "vpc_id" {
+  type        = "string"
+  description = "The VPC to deploy into"
+}
+
 #Set autoscaling variables
 variable "enable_autoscaling" {
   description = "Enable application autoscaling"
@@ -83,6 +88,11 @@ variable "listener_port" {
   default     = 0
 }
 
+variable "container_port" {
+  description = "The port the container will listen on usually overridden in container definition"
+  default     = 3000
+}
+
 #Log group to drop logs into
 variable "log_group_path" {
   type        = "string"
@@ -107,7 +117,7 @@ variable "log_forwarding_name" {
 
 variable "filter_pattern" {
   description = "Pattern used to filter out logs"
-  defaule     = ""
+  default     = ""
 }
 
 variable "max_log_retention" {
