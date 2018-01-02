@@ -75,12 +75,3 @@ resource "aws_ecs_service" "ecs_service_alb" {
     container_port   = "${var.container_port}"
   }
 }
-
-#Whether or not to create a log filter attached to a forwarding lambda function
-module "cloudwatch_to_lambda" {
-  count              = "${var.enable_logs_function}"
-  logs_function_arn  = "${var.logs_function_arn}"
-  logs_function_name = "${var.logs_function_name}"
-  service_name       = "${var.service_name}"
-  log_group_arn      = "${aws_cloudwatch_log_group.task_log.arn}"
-}
