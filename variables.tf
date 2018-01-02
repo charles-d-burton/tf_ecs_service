@@ -80,6 +80,7 @@ variable "nlb_arn" {
 
 variable "listener_port" {
   description = "The port to attach to the load balancer listener"
+  default     = 0
 }
 
 #Log group to drop logs into

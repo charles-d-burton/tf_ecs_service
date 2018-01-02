@@ -7,7 +7,7 @@ Note: You must have a working ECS cluster to use this module, it does not create
 ### Non-load balanced service
 ```hcl
 module "service" {
-    source                = "git::git@github.com:Mindflash/tf-ecs-service?ref={version}"
+    source                = "git::git@github.com:charles-d-burton/tf_ecs_service?ref={version}"
     desired_count         = 1
     enable_log_forwarding = true
     filter_pattern        = ""
@@ -24,7 +24,7 @@ module "service" {
 ### Load-balanced service
 ```hcl
 module "service" {
-    source  = "git::git@github.com:Mindflash/tf-ecs-service?ref={version}"
+    source  = "git::git@github.com:charles-d-burton/tf_ecs_service?ref={version}"
     desired_count = 2
     enable_log_forwarding = true
     logs_function_arn = "{arn_of_log_function}"
