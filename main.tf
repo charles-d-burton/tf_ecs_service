@@ -57,7 +57,7 @@ resource "aws_alb_listener" "front_end_http" {
   }
 }
 
-resource "aws_security_group_rule" {
+resource "aws_security_group_rule" "alb_sg_attach" {
   type              = "ingress"
   from_port         = "${var.listener_port}"
   to_port           = "${var.listener_port}"
