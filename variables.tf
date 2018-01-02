@@ -105,7 +105,7 @@ variable "listener_port" {
 
 variable "container_port" {
   description = "The port the container will listen on usually overridden in container definition"
-  default     = 3000
+  default     = 0
 }
 
 #Log group to drop logs into
