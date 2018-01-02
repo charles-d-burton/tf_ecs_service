@@ -35,6 +35,11 @@ variable "vpc_id" {
   description = "The VPC to deploy into"
 }
 
+variable "alb_security_group" {
+  type        = "string"
+  description = "The id of the security group to add a rule to"
+}
+
 #Set autoscaling variables
 variable "enable_autoscaling" {
   description = "Enable application autoscaling"

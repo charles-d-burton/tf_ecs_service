@@ -57,6 +57,15 @@ resource "aws_alb_listener" "front_end_http" {
   }
 }
 
+resource "aws_security_group_rule" {
+  type              = "ingress"
+  from_port         = "${var.listener_port}"
+  to_port           = "${var.listener_port}"
+  protocol          = "all"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = "${var.alb_security_group}"
+}
+
 #Create the service and attach the task definition
 resource "aws_ecs_service" "ecs_service_alb" {
   count           = "${var.use_alb ? 1 : 0}"
