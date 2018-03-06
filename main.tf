@@ -26,11 +26,12 @@ resource "aws_ecs_service" "ecs_service" {
 
 #Create the target group for the http version of the service
 resource "aws_alb_target_group" "target_group_http" {
-  count    = "${var.use_alb ? 1 : 0}"
-  name     = "${var.service_name}"
-  port     = "${var.container_port}"
-  protocol = "HTTP"
-  vpc_id   = "${var.vpc_id}"
+  count                = "${var.use_alb ? 1 : 0}"
+  name                 = "${var.service_name}"
+  port                 = "${var.container_port}"
+  protocol             = "HTTP"
+  vpc_id               = "${var.vpc_id}"
+  deregistration_delay = "${var.deregistration_delay}"
 
   health_check {
     interval            = "${var.health_check_interval}"

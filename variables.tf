@@ -113,6 +113,11 @@ variable "stickiness_enabled" {
   default     = false
 }
 
+variable "deregistration_delay" {
+  description = "The amount of time to drain connections before terminating containers"
+  default     = 60
+}
+
 #Log group to drop logs into
 variable "log_group_path" {
   type        = "string"
