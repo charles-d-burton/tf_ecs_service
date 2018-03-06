@@ -76,6 +76,7 @@ resource "aws_ecs_service" "ecs_service_alb" {
 
   depends_on = [
     "aws_alb_listener.front_end_http",
+    "aws_ecs_task_definition.task_definition",
   ]
 
   load_balancer {
