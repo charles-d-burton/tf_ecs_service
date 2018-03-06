@@ -42,6 +42,11 @@ resource "aws_alb_target_group" "target_group_http" {
     unhealthy_threshold = "${var.health_check_unhealthy_threshold}"
     matcher             = "${var.health_check_matcher}"
   }
+
+  stickiness {
+    type    = "lb_cookie"
+    enabled = "${var.stickiness_enabled}"
+  }
 }
 
 #Create the HTTP listener bound to the internal load balancer
@@ -76,7 +81,6 @@ resource "aws_ecs_service" "ecs_service_alb" {
 
   depends_on = [
     "aws_alb_listener.front_end_http",
-    "aws_ecs_task_definition.task_definition",
   ]
 
   load_balancer {

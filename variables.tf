@@ -108,6 +108,11 @@ variable "container_port" {
   default     = 0
 }
 
+variable "stickiness_enabled" {
+  description = "Enable or disable sticky cookies on the load balancer"
+  default     = false
+}
+
 #Log group to drop logs into
 variable "log_group_path" {
   type        = "string"
