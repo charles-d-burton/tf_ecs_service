@@ -63,11 +63,12 @@ resource "aws_alb_listener" "front_end_http" {
   }
 }
 
+#Turn off allowing anything in.  This defaults to a deny policy
 resource "aws_security_group_rule" "alb_sg_attach" {
   type              = "ingress"
   from_port         = "${var.listener_port}"
   to_port           = "${var.listener_port}"
-  protocol          = "all"
+  protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = "${var.alb_security_group}"
 }
