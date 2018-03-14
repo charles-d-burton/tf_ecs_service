@@ -46,5 +46,5 @@ resource "aws_iam_policy_attachment" "logging_attach" {
   count      = "${var.enable_log_forwarding  ? 1 : 0 }"
   name       = "logging-attachment-${var.service_name}"
   policy_arn = "${aws_iam_policy.logging_policy.arn}"
-  role       = "${aws_iam_role.iam_for_logging.name}"
+  roles      = ["${aws_iam_role.iam_for_logging.name}"]
 }

@@ -58,5 +58,5 @@ resource "aws_iam_policy_attachment" "autoscaling_attachment" {
   count      = "${var.enable_autoscaling ? 1 : 0}"
   name       = "tf-autoscaling-attachment-${var.service_name}"
   policy_arn = "${aws_iam_policy.autoscaling_policy.arn}"
-  role       = "${aws_iam_role.autoscaling_role.name}"
+  roles      = ["${aws_iam_role.autoscaling_role.name}"]
 }
