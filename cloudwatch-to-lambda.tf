@@ -25,7 +25,7 @@ resource "aws_lambda_permission" "allow_cloudwatch" {
   source_account = "${data.aws_caller_identity.current.account_id}"
 
   # source_arn     = "arn:aws:logs:${var.region}:${data.aws_caller_identity.current.account_id}:log-group:ECS-${var.service_name}:*"
-  source_arn = "${aws_cloudwatch_log_group.task_log.arn}:*"
+  source_arn = "${aws_cloudwatch_log_group.task_log.arn}"
 }
 
 resource "aws_iam_role" "iam_for_logging" {
