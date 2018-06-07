@@ -75,7 +75,7 @@ resource "aws_security_group_rule" "alb_sg_attach" {
 
 #Create the service and attach the task definition
 resource "aws_ecs_service" "ecs_service_alb" {
-  count           = "${var.use_alb ? 1 : 0}"
+  count           = "${var.use_alb && var.namespace_arn == "" ? 1 : 0}"
   name            = "${var.service_name}"
   cluster         = "${var.cluster_name}"
   task_definition = "${aws_ecs_task_definition.task_definition.arn}"
@@ -89,5 +89,49 @@ resource "aws_ecs_service" "ecs_service_alb" {
     target_group_arn = "${aws_alb_target_group.target_group_http.arn}"
     container_name   = "${var.service_name}"
     container_port   = "${var.container_port}"
+  }
+}
+
+resource "aws_ecs_service" "ecs_service_alb_sd" {
+  count           = "${var.use_alb && var.namespace_arn != "" ? 1 : 0}"
+  name            = "${var.service_name}"
+  cluster         = "${var.cluster_name}"
+  task_definition = "${aws_ecs_task_definition.task_definition.arn}"
+  desired_count   = "${var.desired_count}"
+
+  depends_on = [
+    "aws_alb_listener.front_end_http",
+  ]
+
+  load_balancer {
+    target_group_arn = "${aws_alb_target_group.target_group_http.arn}"
+    container_name   = "${var.service_name}"
+    container_port   = "${var.container_port}"
+  }
+
+  service_registries {
+    registry_arn   = "${var.namespace_arn}"
+    container_port = "${var.container_port}"
+  }
+}
+
+# define service discovery zone
+resource "aws_service_discovery_service" "sd_service" {
+  count = "${var.namespace_arn == "" ? 0 : 1 }"
+  name  = "${var.sd_name == "" ? var.service_name : var.sd_name}"
+
+  dns_config {
+    namespace_id = "${var.namespace_id}"
+
+    dns_records {
+      ttl  = 10
+      type = "SRV"
+    }
+
+    routing_policy = "MULTIVALUE"
+  }
+
+  health_check_custom_config {
+    failure_threshold = 1
   }
 }
